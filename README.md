@@ -1,8 +1,6 @@
 # Leaderboard-API
 
-[![HitCount](https://hits.dwyl.com/{username}/{project-name}.svg)](https://hits.dwyl.com/{username}/{project-name})
-
-## No more of you raging because you messed up your leaderboard implementation
+### No more of you raging because you messed up your leaderboard implementation
 
 ![you raging because you messed up your 17th leaderboard implementation](clout_chasing/spike-monkey-typing.gif)
 
