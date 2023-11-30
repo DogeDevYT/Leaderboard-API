@@ -27,11 +27,26 @@ def read_config():
     if data['ranking']['top'] == 'highest':
         count = data['ranking']['count']
         printUtil.print_text_in_green(f"Reading top {data['ranking']['count']} from database...")
-        config_settings.update({"ranking": {
-            "top": "highest",
-            "count": count
-        }})
+        config_settings.update(
+        {   "ranking":
+            {
+                "top": "highest",
+                "count": count
+            }
+        })
     else:
         printUtil.print_text_in_red(f"Unsupported Ranking System! Exiting...")
+        exit(1)
+
+    outputFormat = data['output']
+
+    if outputFormat == 'textfile' or outputFormat == 'txt':
+        printUtil.print_text_in_green(f"Outputting the leaderboard data to a text file...")
+        config_settings.update({"output": "textfile"})
+    elif outputFormat == 'website':
+        printUtil.print_text_in_green(f"Outputting the leaderboard data to a static HTML website...")
+        config_settings.update({"output": "website"})
+    else:
+        printUtil.print_text_in_red(f"Unsupported Output Format! Exiting...")
         exit(1)
     return config_settings

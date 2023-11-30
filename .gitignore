@@ -1,0 +1,2 @@
+# Ignore all files named "leaderboard" with any extension in the "output" directory
+output/leaderboard.*
