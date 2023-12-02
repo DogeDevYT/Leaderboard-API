@@ -1,8 +1,7 @@
 from art import *
 from colorama import init
 from util import printUtil
-from config import configReader
-from reading import mongodbReader
+from reading import mongodbReader, configReader
 from output import leaderboardWriter as lbWriter
 
 # Initialize colorama on Windows

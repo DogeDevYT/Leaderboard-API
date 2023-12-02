@@ -10,7 +10,7 @@ class ConfigReader:
         config_settings = {}
         try:
             self.printer.print_text_in_color(f"Reading config.json...", "green")
-            config_file_path = os.path.join('config', 'config.json')
+            config_file_path = os.path.join('config', '../config/config.json')
             with open(config_file_path, 'r') as config_file:
                 data = json.load(config_file)
         except FileNotFoundError as e:
