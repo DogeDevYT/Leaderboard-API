@@ -3,31 +3,37 @@ from colorama import init
 from util import printUtil
 from config import configReader
 from reading import mongodbReader
-from output import textfileOutput
-from output import websiteOutput
+from output import leaderboardWriter as lbWriter
 
 # Initialize colorama on Windows
 init()
 
+#Create our instances of all our Classes
+writer = lbWriter.LeaderboardWriter()
+config_reader = configReader.ConfigReader()
+printer = printUtil.TextPrinter
+
 # Create ASCII art banner with colored text
 ascii_art = text2art("Leaderboard-API")
-printUtil.print_text_in_green(ascii_art)
+printer.print_text_in_color(ascii_art, "green")
 
-printUtil.print_text_in_green(f"Starting Leaderboard-API...")
+printer.print_text_in_color(f"Starting Leaderboard-API...", "green")
 
-# read config file and store config
-config = configReader.read_config()
+#store config settings
+config = config_reader.read_config()
 
 ranking_method = config["ranking"]["top"]
 count = config["ranking"]["count"]
+db = config["db"]
 
-if config["db"] == "mongodb":
-    leaderboard_data = mongodbReader.readMongodb(ranking_method, count)
-    printUtil.print_text_in_green(f"Successfully read {ranking_method} {count} from {config['db']}")
+if db == "mongodb":
+    mongodb_reader_object = mongodbReader.MongodbReader()
+    leaderboard_data = mongodb_reader_object.read_mongodb(ranking=ranking_method, count=count)
+    printer.print_text_in_color(f"Successfully read {ranking_method} {count} from {db}", "green")
 
 if config["output"] == "textfile":
-    textfileOutput.write_to_text_file(leaderboard_data)
-    printUtil.print_text_in_green(f"Successfully wrote leaderboard data to output/leaderboard.txt")
+    writer.write_to_text_file(leaderboard_data=leaderboard_data)
+    printer.print_text_in_color(f"Successfully wrote leaderboard data to output/leaderboard.txt", "green")
 elif config['output'] == 'website':
-    websiteOutput.write_leaderboard_website(leaderboard_data)
-    printUtil.print_text_in_green(f"Successfully wrote leaderboard data to output/leaderboard.html")
+    writer.write_leaderboard_website(leaderboard_data=leaderboard_data)
+    printer.print_text_in_color(f"Successfully wrote leaderboard data to output/leaderboard.html", "green")

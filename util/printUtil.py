@@ -1,6 +1,11 @@
-from colorama import Fore, Back, Style
+from colorama import Fore, Style
 
-def print_text_in_green(text_to_print):
-    print(f"{Fore.GREEN}{text_to_print}{Style.RESET_ALL}")
-def print_text_in_red(text_to_print):
-    print(f"{Fore.RED}{text_to_print}{Style.RESET_ALL}")
+class TextPrinter:
+    @staticmethod
+    def print_text_in_color(text_to_print, color):
+        if color == 'green':
+            print(f"{Fore.GREEN}{text_to_print}{Style.RESET_ALL}")
+        elif color == 'red':
+            print(f"{Fore.RED}{text_to_print}{Style.RESET_ALL}")
+        else:
+            print(text_to_print)  # Print without color if not green or red

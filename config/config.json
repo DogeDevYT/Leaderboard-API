@@ -4,5 +4,5 @@
     "top": "highest",
     "count": 10
   },
-  "output": "website"
+  "output": "textfile"
 }
