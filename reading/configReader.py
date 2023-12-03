@@ -19,6 +19,9 @@ class ConfigReader:
         if data['database-type'] == 'mongodb':
             self.printer.print_text_in_color(f"Reading from mongodb database...", "green")
             config_settings.update({"db": "mongodb"})
+        elif data['database-type'] == 'postgresql':
+            self.printer.print_text_in_color(f"Reading from postgresql database...", "green")
+            config_settings.update({"db": "postgresql"})
         else:
             self.printer.print_text_in_color(f"Unrecognized/Unsupported Database Type! Exiting...", "red")
             exit(1)

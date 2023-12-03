@@ -1,0 +1,10 @@
+{
+  "dbname": "insert database name here",
+  "username": "insert user for database here",
+  "password": "insert password for the database user here",
+  "host": "enter host location for database here (default localhost)",
+  "port": "enter port here (default 5432)",
+  "table": "enter the table you want to get your data from (think like a results table)",
+  "comparingField": "enter the field you want to compare the db results by",
+  "name": "enter the name you want to use for the leaderboard"
+}

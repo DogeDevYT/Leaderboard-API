@@ -22,7 +22,7 @@ class MongodbReader:
             with open(config_file_path, 'r') as config_file:
                 data = json.load(config_file)
         except FileNotFoundError as e:
-            printUtil.print_text_in_red("Config File for MongoDB Not Found at /config/mongodbConfig.json! Exiting...")
+            self.printer.print_text_in_color("Config File for MongoDB Not Found at /config/mongodbConfig.json! Exiting...", "red")
             exit(1)
 
         username = data["username"]
@@ -47,11 +47,8 @@ class MongodbReader:
                 self._update_leaderboard_dict(mongoDBCursor=cursor, nameToDisplay=nameToDisplay)
         except Exception as e:
             self.printer.print_text_in_color("Connection to MongoDB failed: " + str(e), "red")
-        return self.results
-
-    def close_connection(self):
-        if self.client:
+        finally:
             self.client.close()
-
+        return self.results
 # sample connction string:
 # uri = "mongodb+srv://<username>:<password>@thecluster.pm9jkpk.mongodb.net"
