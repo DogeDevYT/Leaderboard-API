@@ -29,4 +29,5 @@ the different database reader files with your specific info to allow for easy re
 ## Features
 
 - MongoDB Integration
+- PostgreSQL Integration
 - Allows for writing of files to either a text file or static HTML website (more coming soon!)
