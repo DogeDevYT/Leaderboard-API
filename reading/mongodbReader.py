@@ -8,6 +8,13 @@ class MongodbReader:
     def __init__(self):
         self.results = {}
         self.client = None
+        self.printer = printUtil.TextPrinter
+
+    def _update_leaderboard_dict(self, mongoDBCursor, nameToDisplay):
+        counter = 1
+        for document in mongoDBCursor:
+            self.results.update({counter: document[nameToDisplay]})
+            counter += 1
 
     def read_mongodb(self, ranking, count):
         try:
@@ -34,12 +41,12 @@ class MongodbReader:
 
             if ranking == "highest":
                 cursor = accessed_collection.find({}, {"_id": 0}).sort(comparingField, pymongo.DESCENDING).limit(count)
-                counter = 1
-                for document in cursor:
-                    self.results.update({counter: document[nameToDisplay]})
-                    counter += 1
+                self._update_leaderboard_dict(mongoDBCursor=cursor, nameToDisplay=nameToDisplay)
+            elif ranking == "lowest":
+                cursor = accessed_collection.find({}, {"_id": 0}).sort(comparingField, pymongo.ASCENDING).limit(count)
+                self._update_leaderboard_dict(mongoDBCursor=cursor, nameToDisplay=nameToDisplay)
         except Exception as e:
-            printUtil.print_text_in_red("Connection to MongoDB failed: " + str(e))
+            self.printer.print_text_in_color("Connection to MongoDB failed: " + str(e), "red")
         return self.results
 
     def close_connection(self):

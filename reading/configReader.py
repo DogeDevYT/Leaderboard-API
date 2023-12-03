@@ -25,9 +25,15 @@ class ConfigReader:
 
         if data['ranking']['top'] == 'highest':
             count = data['ranking']['count']
-            self.printer.print_text_in_color(f"Reading top {data['ranking']['count']} from database...", "green")
+            self.printer.print_text_in_color(f"Reading top {count} from database...", "green")
             config_settings.update(
                 {"ranking": {"top": "highest", "count": count}}
+            )
+        elif data['ranking']['top'] == 'lowest':
+            count = data['ranking']['count']
+            self.printer.print_text_in_color(f"Reading bottom {count} from database...", "green")
+            config_settings.update(
+                {"ranking": {"top": "lowest", "count": count}}
             )
         else:
             self.printer.print_text_in_color(f"Unsupported Ranking System! Exiting...", "red")
