@@ -19,6 +19,7 @@ class PostgresqlReader:
             for row in rows:
                 name = row[name_index]
                 self.results.update({counter: name})
+                counter += 1
         else:
             self.printer.print_text_in_color("Incorrect name field for PostgreSQL reading! Quitting...", "red")
             exit(1)
