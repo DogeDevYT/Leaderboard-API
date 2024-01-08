@@ -3,8 +3,8 @@
   "password": "BigChungus",
   "uri1": "mongodb+srv://",
   "uri2": "@thecluster.pm9jkpk.mongodb.net",
-  "database": "dookertrooker",
-  "collection": "naenae",
-  "comparingField": "value",
-  "nameToDisplay": "name"
+  "database": "sample_analytics",
+  "collection": "accounts",
+  "comparingField": "limit",
+  "nameToDisplay": "account_id"
 }

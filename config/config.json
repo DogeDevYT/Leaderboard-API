@@ -1,8 +1,8 @@
 {
   "database-type": "mongodb",
   "ranking": {
-    "top": "lowest",
-    "count": 10
+    "top": "highest",
+    "count": 100
   },
-  "output": "textfile"
+  "output": "website"
 }

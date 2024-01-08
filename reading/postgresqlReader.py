@@ -2,6 +2,7 @@ from util import printUtil
 import psycopg2
 import os
 import json
+import traceback
 
 class PostgresqlReader:
     def __init__(self):
@@ -26,13 +27,13 @@ class PostgresqlReader:
 
     def _select_top_or_bottom_from_table(self, cursor, count, table_name, rankingMethod, comparingField, nameField):
         if rankingMethod == "highest":
-            cursor.execute(f"SELECT * FROM {table_name} ORDER_BY {comparingField} DESC LIMIT {count}")
+            cursor.execute(f"SELECT * FROM {table_name} ORDER BY {comparingField} DESC LIMIT {count}")
             rows = cursor.fetchall()
             # get column names
             column_names = [desc[0] for desc in cursor.description]
             self._add_rows_to_results_dict(rows=rows, nameField=nameField, column_names=column_names)
         elif rankingMethod == "lowest":
-            cursor.execute(f"SELECT * FROM {table_name} ORDER_BY {comparingField} ASC LIMIT {count}")
+            cursor.execute(f"SELECT * FROM {table_name} ORDER BY {comparingField} ASC LIMIT {count}")
             rows = cursor.fetchall()
             # get column names
             column_names = [desc[0] for desc in cursor.description]
@@ -59,7 +60,7 @@ class PostgresqlReader:
 
         try:
             self.connection = psycopg2.connect(dbname=dbname,
-                                               username=username,
+                                               user=username,
                                                password=password, host=host,
                                                port=port)
             # make a cursor to execute SQL queries
@@ -72,6 +73,8 @@ class PostgresqlReader:
                                                   nameField=name_field)
         except psycopg2.Error as e:
             self.printer.print_text_in_color(f"Error connecting to postgresql database {e}", "red")
+            self.printer.print_text_in_color(f"{traceback.format_exc()}", "red")
         finally:
+            self.connection.cursor().close()
             self.connection.close()
         return self.results
