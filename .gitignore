@@ -1,6 +1,9 @@
 # Ignore all files named "leaderboard" with any extension in the "output" directory
 output/leaderboard.*
 
+#ignore testing data
+testing/random_data_with_unique_names.csv
+
 # get rid of pycache and .idea directories
 __pycache__/
 .idea/
