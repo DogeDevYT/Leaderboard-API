@@ -25,14 +25,12 @@ class MongodbReader:
             self.printer.print_text_in_color("Config File for MongoDB Not Found at /config/mongodbConfig.json! Exiting...", "red")
             exit(1)
 
-        username = data["username"]
-        password = data["password"]
         database = data["database"]
         collection = data["collection"]
-        comparingField = data["comparingField"]
-        nameToDisplay = data["nameToDisplay"]
+        comparing_field = data["comparingField"]
+        name_to_display = data["nameToDisplay"]
 
-        uri = f"{data['uri1']}{username}:{password}{data['uri2']}"
+        uri = data["uri"]
 
         try:
             self.client = MongoClient(uri)
@@ -40,11 +38,11 @@ class MongodbReader:
             accessed_collection = db[collection]
 
             if ranking == "highest":
-                cursor = accessed_collection.find({}, {"_id": 0}).sort(comparingField, pymongo.DESCENDING).limit(count)
-                self._update_leaderboard_dict(mongoDBCursor=cursor, nameToDisplay=nameToDisplay)
+                cursor = accessed_collection.find({}, {"_id": 0}).sort(comparing_field, pymongo.DESCENDING).limit(count)
+                self._update_leaderboard_dict(mongoDBCursor=cursor, nameToDisplay=name_to_display)
             elif ranking == "lowest":
-                cursor = accessed_collection.find({}, {"_id": 0}).sort(comparingField, pymongo.ASCENDING).limit(count)
-                self._update_leaderboard_dict(mongoDBCursor=cursor, nameToDisplay=nameToDisplay)
+                cursor = accessed_collection.find({}, {"_id": 0}).sort(comparing_field, pymongo.ASCENDING).limit(count)
+                self._update_leaderboard_dict(mongoDBCursor=cursor, nameToDisplay=name_to_display)
         except Exception as e:
             self.printer.print_text_in_color("Connection to MongoDB failed: " + str(e), "red")
         finally:

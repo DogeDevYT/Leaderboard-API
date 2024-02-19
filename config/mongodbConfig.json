@@ -1,8 +1,5 @@
 {
-  "username": "admin",
-  "password": "BigChungus",
-  "uri1": "mongodb+srv://",
-  "uri2": "@thecluster.pm9jkpk.mongodb.net",
+  "uri": "mongodb+srv://admin:BigChungus@thecluster.pm9jkpk.mongodb.net/",
   "database": "dookertrooker",
   "collection": "naenae",
   "comparingField": "value",
