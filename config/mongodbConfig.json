@@ -1,7 +1,7 @@
 {
   "uri": "mongodb+srv://admin:BigChungus@thecluster.pm9jkpk.mongodb.net/",
-  "database": "sample_airbnb",
-  "collection": "listingsAndReviews",
-  "comparingField": "first_review",
+  "database": "sample_training",
+  "collection": "companies",
+  "comparingField": "created_at",
   "nameToDisplay": "name"
 }
