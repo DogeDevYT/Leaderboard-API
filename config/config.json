@@ -1,8 +1,8 @@
 {
-  "database-type": "mongodb",
+  "database-type": "postgres",
   "ranking": {
-    "top": "time highest",
-    "count": 100
+    "top": "lowest",
+    "count": 10
   },
   "output": "website"
 }

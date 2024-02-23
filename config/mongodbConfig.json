@@ -1,7 +1,7 @@
 {
   "uri": "mongodb+srv://admin:BigChungus@thecluster.pm9jkpk.mongodb.net/",
-  "database": "sample_training",
-  "collection": "companies",
-  "comparingField": "created_at",
+  "database": "dookertrooker",
+  "collection": "naenae",
+  "comparingField": "value",
   "nameToDisplay": "name"
 }

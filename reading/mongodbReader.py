@@ -70,7 +70,6 @@ class MongodbReader:
             self.printer.print_text_in_color(f"Unsupported ranking System for Time MongoDB! Exiting...", "red")
             exit(1)
         # Add a new field with a unified date format
-        # Add a new field with a unified date format
         pipeline = [
             {
                 '$addFields': {
