@@ -43,6 +43,15 @@ class MongodbReader:
             elif ranking == "lowest":
                 cursor = accessed_collection.find({}, {"_id": 0}).sort(comparing_field, pymongo.ASCENDING).limit(count)
                 self._update_leaderboard_dict(mongoDBCursor=cursor, nameToDisplay=name_to_display)
+            elif ranking == 'time highest':
+                cursor = accessed_collection.find().sort(comparing_field, pymongo.DESCENDING).limit(count)
+                self._update_leaderboard_dict(mongoDBCursor=cursor, nameToDisplay=name_to_display)
+            elif ranking == 'time lowest':
+                cursor = accessed_collection.find().sort(comparing_field, pymongo.ASCENDING).limit(count)
+                self._update_leaderboard_dict(mongoDBCursor=cursor, nameToDisplay=name_to_display)
+            else:
+                self.printer.print_text_in_color(f"Unsupported Ranking System for MongoDB! Exiting...", "red")
+                exit(1)
         except Exception as e:
             self.printer.print_text_in_color("Connection to MongoDB failed: " + str(e), "red")
         finally:

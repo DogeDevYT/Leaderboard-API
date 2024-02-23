@@ -57,12 +57,12 @@ class LeaderboardWriter:
         return leaderboard_html
 
     def write_to_text_file(self, leaderboard_data):
-        with open(self.output_path_text, "w") as output_file:
+        with open(self.output_path_text, "w", encoding='utf-8') as output_file:
             for rank, name in leaderboard_data.items():
                 output_file.write(f"{rank}:{name}\n")
 
     def write_leaderboard_website(self, leaderboard_data):
         html = self._generate_leaderboard_html(leaderboard_data)
 
-        with open(self.output_path_html, "w") as output_file:
+        with open(self.output_path_html, "w", encoding='utf-8') as output_file:
             output_file.write(html)

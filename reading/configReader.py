@@ -38,6 +38,18 @@ class ConfigReader:
             config_settings.update(
                 {"ranking": {"top": "lowest", "count": count}}
             )
+        elif data['ranking']['top'] == 'time highest':
+            count = data['ranking']['count']
+            self.printer.print_text_in_color(f"Reading top {count} (time) from database...", "green")
+            config_settings.update(
+                {"ranking": {"top": "time highest", "count": count}}
+            )
+        elif data['ranking']['top'] == 'time lowest':
+            count = data['ranking']['count']
+            self.printer.print_text_in_color(f"Reading bottom {count} (time) from database...", "green")
+            config_settings.update(
+                {"ranking": {"top": "time lowest", "count": count}}
+            )
         else:
             self.printer.print_text_in_color(f"Unsupported Ranking System! Exiting...", "red")
             exit(1)

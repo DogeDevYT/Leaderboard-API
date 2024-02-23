@@ -1,7 +1,7 @@
 {
   "uri": "mongodb+srv://admin:BigChungus@thecluster.pm9jkpk.mongodb.net/",
-  "database": "dookertrooker",
-  "collection": "naenae",
-  "comparingField": "value",
+  "database": "sample_airbnb",
+  "collection": "listingsAndReviews",
+  "comparingField": "first_review",
   "nameToDisplay": "name"
 }
