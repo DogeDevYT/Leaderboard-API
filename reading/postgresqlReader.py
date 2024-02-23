@@ -26,18 +26,21 @@ class PostgresqlReader:
             exit(1)
 
     def _select_top_or_bottom_from_table(self, cursor, count, table_name, rankingMethod, comparingField, nameField):
-        if rankingMethod == "highest":
+        if rankingMethod == "highest" or rankingMethod == "time highest":
             cursor.execute(f"SELECT * FROM {table_name} ORDER BY {comparingField} DESC LIMIT {count}")
             rows = cursor.fetchall()
             # get column names
             column_names = [desc[0] for desc in cursor.description]
             self._add_rows_to_results_dict(rows=rows, nameField=nameField, column_names=column_names)
-        elif rankingMethod == "lowest":
+        elif rankingMethod == "lowest" or rankingMethod == "time lowest":
             cursor.execute(f"SELECT * FROM {table_name} ORDER BY {comparingField} ASC LIMIT {count}")
             rows = cursor.fetchall()
             # get column names
             column_names = [desc[0] for desc in cursor.description]
             self._add_rows_to_results_dict(rows=rows, nameField=nameField, column_names=column_names)
+        else:
+            self.printer.print_text_in_color("Unsupported Ranking System for PostgreSQL! Quitting!", "red")
+            exit(1)
 
     def read_postgresql_data(self, rankingMethod, count):
         try:
