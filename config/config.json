@@ -1,7 +1,7 @@
 {
   "database-type": "mongodb",
   "ranking": {
-    "top": "time lowest",
+    "top": "time highest",
     "count": 100
   },
   "output": "website"
