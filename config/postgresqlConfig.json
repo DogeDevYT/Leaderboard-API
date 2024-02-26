@@ -4,7 +4,7 @@
   "password": "password",
   "host": "localhost",
   "port": "5432",
-  "table": "employees",
-  "comparingField": "salary",
+  "table": "times",
+  "comparingField": "stopwatch_time",
   "name": "name"
 }

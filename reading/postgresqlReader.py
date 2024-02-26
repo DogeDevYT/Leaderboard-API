@@ -26,14 +26,26 @@ class PostgresqlReader:
             exit(1)
 
     def _select_top_or_bottom_from_table(self, cursor, count, table_name, rankingMethod, comparingField, nameField):
-        if rankingMethod == "highest" or rankingMethod == "time highest":
+        if rankingMethod == "highest":
             cursor.execute(f"SELECT * FROM {table_name} ORDER BY {comparingField} DESC LIMIT {count}")
             rows = cursor.fetchall()
             # get column names
             column_names = [desc[0] for desc in cursor.description]
             self._add_rows_to_results_dict(rows=rows, nameField=nameField, column_names=column_names)
-        elif rankingMethod == "lowest" or rankingMethod == "time lowest":
+        elif rankingMethod == "lowest":
             cursor.execute(f"SELECT * FROM {table_name} ORDER BY {comparingField} ASC LIMIT {count}")
+            rows = cursor.fetchall()
+            # get column names
+            column_names = [desc[0] for desc in cursor.description]
+            self._add_rows_to_results_dict(rows=rows, nameField=nameField, column_names=column_names)
+        elif rankingMethod == "time highest":
+            cursor.execute(f"SELECT * FROM {table_name} ORDER BY CAST({comparingField} AS interval) DESC LIMIT {count}")
+            rows = cursor.fetchall()
+            # get column names
+            column_names = [desc[0] for desc in cursor.description]
+            self._add_rows_to_results_dict(rows=rows, nameField=nameField, column_names=column_names)
+        elif rankingMethod == "time lowest":
+            cursor.execute(f"SELECT * FROM {table_name} ORDER BY CAST({comparingField} AS interval) ASC LIMIT {count}")
             rows = cursor.fetchall()
             # get column names
             column_names = [desc[0] for desc in cursor.description]
