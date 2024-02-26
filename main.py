@@ -30,12 +30,10 @@ if db == "mongodb":
     mongodb_reader_object = mongodbReader.MongodbReader()
     leaderboard_data = mongodb_reader_object.read_mongodb(ranking=ranking_method, count=count)
     printer.print_text_in_color(f"Successfully read {ranking_method} {count} from {db}", "green")
-    print(leaderboard_data)
 elif db == "postgresql":
     postgresql_reader_object = postgresqlReader.PostgresqlReader()
     leaderboard_data = postgresql_reader_object.read_postgresql_data(rankingMethod=ranking_method, count=count)
     printer.print_text_in_color(f"Successfully read {ranking_method} {count} from {db}", "green")
-    print(leaderboard_data)
 
 if output == "textfile":
     writer.write_to_text_file(leaderboard_data=leaderboard_data)
